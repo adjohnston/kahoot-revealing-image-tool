@@ -1,0 +1,19 @@
+{
+  "name": "kahoot-revealing-image-tool",
+  "version": "0.0.1",
+  "description": "A CLI to generate revealing images to be used on Kahoot!",
+  "author": "Adam Johnston",
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adjohnston/kahoot-revealing-image-tool"
+  },
+  "bin": {
+    "kahoot-reveal": "test.js"
+  },
+  "devDependencies": {
+    "gifencoder": "^1.0.6",
+    "gm": "^1.21.1",
+    "minimist": "^1.2.0"
+  }
+}
