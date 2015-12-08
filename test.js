@@ -5,15 +5,7 @@ var argv       = require('minimist')(process.argv.slice(2)),
     gm         = require('gm'),
     pngStream  = require('png-file-stream'),
     gifencoder = require('gifencoder');
-
-// exec(compare -highlight-style assign -highlight-color purple -file userArgs[0])
-
-//  kahoot-reveal --theme [default] --time [20sec] --file
-//  for each frame of the revealing theme
-  //  get the size of the users image
-  //  resize the the revealing image frame
-  //  set the delay based on the users requirement
-  //  return animated gif
+    
 
 var image       = argv.image,
     imageStream = fs.createReadStream(image),
