@@ -51,9 +51,11 @@ gm(imageStream)
         });
     });
 
-    console.log('done');
-
-    pngStream('.tmp/**/temp_?.png')
-      .pipe(encoder.createWriteStream({repeat: 0, delay: 500, quality: 10 }))
+    pngStream('.tmp/temp_?.png')
+      .pipe(encoder.createWriteStream({
+        repeat:  0,
+        delay:   500,
+        quality: 10
+      }))
       .pipe(fs.createWriteStream('animated_' + image + '.gif'));
   });
