@@ -12,8 +12,7 @@ var image       = argv.image,
     tempDir     = './.tmp/'
     themeName   = argv.theme || 'default',
     themeDir    = './themes/' + themeName + '/',
-    themeFrames = fs.readdirSync(themeDir, getFiles).filter(getFrames).sort(),
-    encoder     = new gifencoder(640, 640);
+    themeFrames = fs.readdirSync(themeDir, getFiles).filter(getFrames).sort();
 
 
 function getFiles(err, files) {
@@ -31,6 +30,8 @@ gm(imageStream)
   .resize(640, 640)
   .write(tempDir + 'image.png', function (err) {
     if (err) throw err;
+
+    var encoder = new gifencoder(640, 640);
 
     themeFrames.forEach(function (frame, i) {
       var frameStream  = fs.createReadStream(themeDir + frame);
