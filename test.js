@@ -3,6 +3,7 @@
 var argv       = require('minimist')(process.argv.slice(2)),
     fs         = require('fs'),
     gm         = require('gm'),
+    pngStream  = require('png-file-stream'),
     gifencoder = require('gifencoder');
 
 // exec(compare -highlight-style assign -highlight-color purple -file userArgs[0])
@@ -33,12 +34,6 @@ function getFrames(frame) {
 }
 
 
-encoder.createReadStream().pipe(fs.createWriteStream('myanimated.gif'));
-encoder.start();
-encoder.setRepeat(0);
-encoder.setDelay(2000); // get the time and calculate correctly todo
-encoder.setQuality(10);
-
 gm(imageStream)
   .size(function (err, size) {
     if (err) throw err;
@@ -55,23 +50,15 @@ gm(imageStream)
             .command('composite')
             .in('.tmp/temp_' + i + '.miff')
             .in(image)
-            .write('.tmp/temp-composite_' + i + '.png', function (err) {
+            .write('.tmp/temp_' + i + '.png', function (err) {
               if (err) throw err;
             });
         });
-
-      encoder.addFrame(fs.readFileSync('.tmp/temp-composite_' + i + '.png'));
     });
+
+    console.log('done');
+
+    pngStream('.tmp/**/temp_?.png')
+      .pipe(encoder.createWriteStream({repeat: 0, delay: 500, quality: 10 }))
+      .pipe(fs.createWriteStream('animated_' + image + '.gif'));
   });
-
-  // themeFrames.forEach(function (frame, i) {
-  //   gm()
-  //     .command('composite')
-  //     .in('.tmp/temp_' + i + '.miff')
-  //     .in(image)
-  //     .write('composite.png', function (err) {
-  //       if (err) throw err;
-  //     })
-  // });
-
-encoder.finish();
