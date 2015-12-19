@@ -4,3 +4,6 @@
 ### With Homebrew
 
 `brew install graphicsmagick`
+
+### To use `kahoot-reveal`
+`npm link`
