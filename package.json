@@ -9,7 +9,7 @@
     "url": "https://github.com/adjohnston/kahoot-revealing-image-tool"
   },
   "bin": {
-    "kahoot-reveal": "test.js"
+    "kahoot-reveal": "kahoot-reveal.js"
   },
   "devDependencies": {
     "gifencoder": "^1.0.6",
